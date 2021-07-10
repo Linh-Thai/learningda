@@ -1,0 +1,2 @@
+# learningda
+Python, SQL
