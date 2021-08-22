@@ -76,5 +76,5 @@ __Performing the necessary remediation__:
 ### 3.2 Command
 - wc: counts characters, words, and lines in a file.
 - wc -l: print the amount of lines in a file.
-- head -: print the first lines in the file
+- head -: print the first lines in the file.
 - tail -: print the last lines.
