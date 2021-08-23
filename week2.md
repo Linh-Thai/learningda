@@ -50,6 +50,41 @@ Slow after days of running just fine, and the problem goes away with a reboot:
   - Change code.
   - If you don't have access to the code, another option is to schedule a regular restart to mitigate both the slow program and your computer running out of RAM.
 
+## 2. Slow Code
+We should always start by writing direct code that functions as it should. Only try to expedite if it does make a difference. Try to evalute the time difference it takes to run a code versus the length of time needed for it to be written.
+
+- How we can make our code more efficient?
+  - If we want our code to finish faster, we need to make our computer do less work, and to do this, we'll have to avoid doing work that isn't really needed.
+    - Storing data that was already calculated to avoid calculating it again using the right data structures for the problem and reorganizing the code so that the computer can stay busy while waiting for information from slow sources like disk or over the network
+  - Figuring out where our code is spending most of its time
+    - __Profiler__: a tool that measures the resources that our code is using, giving us a better understanding of what's going on, help us see how the memory is allocated and how the time spent.
+
+Using the right Data Structures:
+- If you need to access elements by position or will always iterate through all the elements, use a list to store them.
+- If we need to look up the elements using a key, we'll use a dictionary.
+
+Expensive Loops:
+- Need to think about what actions we're going to do inside the loop, and when possible, avoid doing expensive actions.
+- If you do an expensive operation inside a loop, you multiply the time it takes to do the expensive operation by the amount of times you repeat the loop.
+
+- How you access the data inside the loop?
+  - If the data is stored in a file, your script will need to parse the file to fetch it.
+  - 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
