@@ -68,8 +68,8 @@ Expensive Loops:
 - If you do an expensive operation inside a loop, you multiply the time it takes to do the expensive operation by the amount of times you repeat the loop.
 
 - How you access the data inside the loop?
-  - If the data is stored in a file, your script will need to parse the file to fetch it.
-  - 
+  - If you store the data in a file, your script will need to parse the file to fetch it. It will be unnecessary and time-consuming if the script reads the whole file everytime. 
+  - Instead, you could parse the file outside of the loop, put the information into a dictionary, and then use the dictionary to retrieve the data inside the loop.
 
 
 
