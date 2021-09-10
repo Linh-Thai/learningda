@@ -1,3 +1,159 @@
+# Week 1: Troubleshooting Concepts
+
+# Summary
+## 1. Introduction to debugging
+### 1.1 Definition
+- Troubleshooting: 
+  - The process of identifying, analyzing and solving problems.
+  - Fixing problems in the system running the application.
+- Debugging:
+  - The process of identifying, analyzing and removing bugs in a system.
+  - Fixing the bugs in the actual code of the application.
+- Debuggers: Let us follow the code line by line, inspect changes in variable assignments, interrupt the program when a specific condition is met, and more. 
+- Reproduction case: A clear description of how and when the problem appears.
+- System calls: Cals that the programs running on our computer make to the running kernel.
+
+### 1.2 Problem Solving Steps
+__Getting information__:
+- Gathering as much information as we need about the current state of things
+- What the issue is, when it happens, and what the consequences are, for example
+- Fingding reproduction case (which is a clear description of how and when the problem appears.)
+
+__Finding the root cause__:
+- Get to the bottom of what's going on, what triggered the problem, and how we can change that. 
+
+__Performing the necessary remediation__:
+- Trying to find short-term solutions in order to progressively resume normal activities. Then working on methods to solve long-term issues and make necessary adjustments to avoid future problems.
+
+### 1.3 Command and tools
+- tcpdump, wireshark: Show us ongoing network connections and help us analyze the traffic going over cabbles.
+- ps, top, free: Show us the number and types of resources used in the system.
+- strace: Look at the system calls made by a program.
+- strace -0: store the output into a file and then browse the content of that file. The -0 flag, lets us refer back to the file later if we need to so, let's go with that one.
+- intrace: Look at the library calls made by a software.
+- astrois: 
+
+## 2. Understanding the problem
+- A reproduction case:
+  -  A way to verify if the problem is present or not.
+  -  Make the reproduction case as simple as possible.
+
+- Figuring out what's causing the problem:
+  -  Reading the logs available to track and find an error message.
+  -  Trying to isolate the conditions that trigger the issue to gain reproduction case.
+  -  Finding the root cause.
+
+- Fingding the root cause:
+  - Usually, when you have a reproduction case, you still don't know the root cause of the problem.
+  - Following a cycle of looking at the information we have, coming up with a hypothesis that could explain the problem, and then testing our hypothesis.
+    - If we confirm our theory, we found the root cause. 
+    - If we don't, then we go back to the beginning and try different possibility.
+  - Need to come up with an idea of a possible cause, check if it's correct and if not, come up with a different idea until we find one that explains the problem.
+    - Look at information we currently have and gather more if we need.
+    - Searching online for the error messages that we get.
+    - Looking at the documentation of the applications involved can also help us.
+
+- Heisenbug:
+  - Observer effect: observing a phenomenon alters the phenomenon.
+  - When we meddle with them, the bug goes away.
+  - These bugs usually point to bad resource management: the memory was wrongly allocated, the network connections weren't correctly initialized, or the open files weren't properly handled.
+
+## 3. Binary search a problem
+### 3.1 Definition
+- Linear Search:
+  - Theory:
+    - Start from the first entry and then check if the name is the one that we're looking for.
+    - If it doesn't match, move to the second element and check again, and keep going until we find the employee with the name we're looking for, or we get to the end of the list.
+  - The time it takes to find the result is proportional to the length of the list.
+
+- Binary Search:
+  - Condition: The lists has to be sorted out.
+  - Theory:
+    - Comparing the name that we're looking for with the element in the middle of the list and check if it's equal, smaller, or bigger.
+    - If it's smaller, we look at the element in the middle of the first half. 
+    - If it's bigger, we look at the element in the middle of the second half. 
+
+### 3.2 Command
+- wc: counts characters, words, and lines in a file.
+- wc -l: print the amount of lines in a file.
+- head -: print the first lines in the file.
+- tail -: print the last lines.
+
+
+# Week 2: Slowness
+
+# Summary
+## 1. Understand Slowness
+## 1.1 Why is my computer slow?
+A slow computer is likely because you have too many programs running. This takes up a lot of processing power and impacts performance and speed.
+
+- Identifying __the bottleneck__ and Addressing slowness:
+  - CPU time
+    - Can close other running programs that you don't need right then.
+  - Don't have enough space on disk
+    - Can uninstall applications that you don't use, or delete or move data that doesn't need to be on that disk.
+  - Network bandwidth
+    - Stopping any other processes that are also using the network.
+We need to make sure that we're actually improving the bottleneck and not just wasting our money on new hardware that will go unused.
+
+- Monitoring the usage of our resources:
+  - Linux systems
+    - top: see how many processes are running and how the CPU time or memory is being used.
+    - iotop, iftop: see which processes are currently using the most disk IO usage or the most network bandwidth
+  - MacOS
+    - Activity Monitor: lets us see what's using the most CPU, memory, energy, disk, or network
+  - Windows
+    - Resource Monitor and Performance Monitor: analyze what's going on with the different resources on the computer including CPU, memory, disk and network
+
+## 1.2 How computers use resources
+When an application is accessing some data, the time spent retrieving that data will depend on where it's located.
+- If the data will be in the __CPU's internal memory__, and our program will retrieve it really fast.
+- If the data will be in __RAM__, our program will still get to a pretty fast.
+  - RAM is limited.
+  - When you run out of RAM:
+    - The OS will just remove from RAM anything that's cached, but not strictly necessary.
+    - If there's still not enough RAM after that, the operating system will put the parts of the memory that aren't currently in use onto the hard drive in a space.
+- If the data will be in __a file__, our program will need to read it from disk, which is much slower than reading it from RAM.
+- Reading data from over the __network__, we have a lower transmission speed.
+
+Three possible reason for a machine being slow due to swapping:
+- There are too many open applications and some can be closed, some of them aren't needed. '
+- The available memory is just too small for the amount that computer is using, consider upgrading RAM.
+- One of the running programs may have a memory leak.
+
+## 1.3 Possible Causes of Slowness
+Slow when starting up:
+- Cause: it's probably a sign that there are too many applications configured to start on boot.
+- Solving: going through the list of programs that start automatically and disabling any that aren't really needed.
+
+Slow after days of running just fine, and the problem goes away with a reboot:
+- Cause: there's a program that's keeping some state while running that's causing the computer to slow down.
+- Solving:
+  - Change code.
+  - If you don't have access to the code, another option is to schedule a regular restart to mitigate both the slow program and your computer running out of RAM.
+
+## 2. Slow Code
+We should always start by writing direct code that functions as it should. Only try to expedite if it does make a difference. Try to evalute the time difference it takes to run a code versus the length of time needed for it to be written.
+
+- How we can make our code more efficient?
+  - If we want our code to finish faster, we need to make our computer do less work, and to do this, we'll have to avoid doing work that isn't really needed.
+    - Storing data that was already calculated to avoid calculating it again using the right data structures for the problem and reorganizing the code so that the computer can stay busy while waiting for information from slow sources like disk or over the network
+  - Figuring out where our code is spending most of its time
+    - __Profiler__: a tool that measures the resources that our code is using, giving us a better understanding of what's going on, help us see how the memory is allocated and how the time spent.
+
+Using the right Data Structures:
+- If you need to access elements by position or will always iterate through all the elements, use a list to store them.
+- If we need to look up the elements using a key, we'll use a dictionary.
+
+Expensive Loops:
+- Need to think about what actions we're going to do inside the loop, and when possible, avoid doing expensive actions.
+- If you do an expensive operation inside a loop, you multiply the time it takes to do the expensive operation by the amount of times you repeat the loop.
+
+- How you access the data inside the loop?
+  - If you store the data in a file, your script will need to parse the file to fetch it. It will be unnecessary and time-consuming if the script reads the whole file everytime. 
+  - Instead, you could parse the file outside of the loop, put the information into a dictionary, and then use the dictionary to retrieve the data inside the loop.
+
+
 # Week 3: Crashing programs
 
 # Summary
