@@ -1,0 +1,33 @@
+**CUSTOMERS_NUMERIC**
+
+INSERT INTO customers_numeric(Column_name, Min_value, Max_value, Avg_value, STDDEV_value)
+SELECT 'creditLimit', MIN(creditLimit), MAX(creditLimit), AVG(creditLimit), STDDEV(creditLimit) 
+FROM customers;
+
+
+**CUSTOMERS_CAT**
+
+INSERT INTO customers_cat(Column_name, Value_in_column, Count_value)
+SELECT 'city',  city, COUNT(*) 
+	FROM customers 
+	GROUP BY city;
+    
+INSERT INTO customers_cat(Column_name, Value_in_column, Count_value)
+SELECT 'state',  state, COUNT(*) 
+	FROM customers 
+	GROUP BY state;    
+    
+INSERT INTO customers_cat(Column_name, Value_in_column, Count_value)
+SELECT 'postalCode',  postalCode, COUNT(*) 
+	FROM customers 
+	GROUP BY postalCode;    
+    
+INSERT INTO customers_cat(Column_name, Value_in_column, Count_value)
+SELECT 'country',  country, COUNT(*) 
+	FROM customers 
+	GROUP BY country;    
+    
+INSERT INTO customers_cat(Column_name, Value_in_column, Count_value)
+SELECT 'salesRepEmployeeNumber',  salesRepEmployeeNumber, COUNT(*) 
+	FROM customers 
+	GROUP BY salesRepEmployeeNumber;  

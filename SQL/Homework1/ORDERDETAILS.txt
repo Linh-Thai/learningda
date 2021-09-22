@@ -1,0 +1,26 @@
+**ORDERDETAILS_NUMERIC**
+
+INSERT INTO orderdetails_numeric(Column_name, Min_value, Max_value, Avg_value, STDDEV_value)
+SELECT 'quantityOrdered', MIN(quantityOrdered), MAX(quantityOrdered), AVG(quantityOrdered), STDDEV(quantityOrdered) 
+FROM orderdetails;
+
+INSERT INTO orderdetails_numeric(Column_name, Min_value, Max_value, Avg_value, STDDEV_value)
+SELECT 'priceEach', MIN(priceEach), MAX(priceEach), AVG(priceEach), STDDEV(priceEach) 
+FROM orderdetails;
+
+**ORDERDETAILS_CAT**
+
+INSERT INTO orderdetails_cat(Column_name, Value_in_column, Count_value)
+SELECT 'orderNumber',  orderNumber, COUNT(*) 
+	FROM orderdetails 
+	GROUP BY orderNumber;
+    
+INSERT INTO orderdetails_cat(Column_name, Value_in_column, Count_value)
+SELECT 'productCode',  productCode, COUNT(*) 
+	FROM orderdetails 
+	GROUP BY productCode;    
+
+INSERT INTO orderdetails_cat(Column_name, Value_in_column, Count_value)
+SELECT 'orderLineNumber',  orderLineNumber, COUNT(*) 
+	FROM orderdetails 
+	GROUP BY orderLineNumber;

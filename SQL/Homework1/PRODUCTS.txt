@@ -1,0 +1,30 @@
+**PRODUCTS_NUMERIC**
+
+INSERT INTO products_numeric(Column_name, Min_value, Max_value, Avg_value, STDDEV_value)
+SELECT 'quantityInStock', MIN(quantityInStock), MAX(quantityInStock), AVG(quantityInStock), STDDEV(quantityInStock) 
+FROM products;
+
+INSERT INTO products_numeric(Column_name, Min_value, Max_value, Avg_value, STDDEV_value)
+SELECT 'buyPrice', MIN(buyPrice), MAX(buyPrice), AVG(buyPrice), STDDEV(buyPrice) 
+FROM products;
+
+INSERT INTO products_numeric(Column_name, Min_value, Max_value, Avg_value, STDDEV_value)
+SELECT 'MSRP', MIN(MSRP), MAX(MSRP), AVG(MSRP), STDDEV(MSRP) 
+FROM products;
+
+**PRODUCTS_CAT**
+
+INSERT INTO products_cat(Column_name, Value_in_column, Count_value)
+SELECT 'productLine',  productLine, COUNT(*) 
+	FROM products 
+	GROUP BY productLine;
+    
+INSERT INTO products_cat(Column_name, Value_in_column, Count_value)
+SELECT 'productScale',  productScale, COUNT(*) 
+	FROM products 
+	GROUP BY productScale;
+    
+INSERT INTO products_cat(Column_name, Value_in_column, Count_value)
+SELECT 'productVendor',  productVendor, COUNT(*) 
+	FROM products 
+	GROUP BY productVendor; 
