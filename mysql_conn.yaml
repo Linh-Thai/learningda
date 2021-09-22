@@ -1,0 +1,6 @@
+mysql:
+  host: 127.0.0.1
+  db_name: quiz
+  port: 33061
+  user: root
+  pwd: p@ssw0rd1
