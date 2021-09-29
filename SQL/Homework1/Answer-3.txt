@@ -1,0 +1,4 @@
+SELECT prod.productCode, productName, productVendor, buyPrice, orderdetails.priceEach
+FROM products prod
+JOIN orderdetails ON prod.productCode = orderdetails.productCode
+WHERE orderdetails.priceEach > 70.00;

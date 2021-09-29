@@ -1,0 +1,8 @@
+SELECT o1.customerNumber, c.customerName, SUM(priceEach) AS TOTAL
+FROM orders o1
+	JOIN customers c USING (customerNumber)
+    JOIN orderdetails o2 USING (orderNumber)
+GROUP BY o1.customerNumber
+ORDER BY TOTAL DESC
+LIMIT 3;
+    

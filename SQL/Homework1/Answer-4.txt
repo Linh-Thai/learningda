@@ -1,0 +1,6 @@
+SELECT c.country, COUNT(c.country) NumberOfOrders
+FROM orders
+JOIN customers c ON orders.customerNumber = c.customerNumber
+GROUP BY c.country
+ORDER BY NumberOfOrders DESC
+LIMIT 1;

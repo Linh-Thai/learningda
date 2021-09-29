@@ -1,0 +1,6 @@
+SELECT officeCode, COUNT(DISTINCT employeeNumber) AS NumbersOfEmployee
+FROM employees
+GROUP BY officeCode
+ORDER BY NumbersOfEmployee DESC
+LIMIT 1;
+

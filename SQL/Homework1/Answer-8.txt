@@ -1,0 +1,15 @@
+CREATE TABLE new_table 
+SELECT o.productCode, p.productLine, SUM(quantityOrdered) AS Total_Quantity
+	FROM orderdetails o 
+	JOIN products p USING (productCode)
+	GROUP BY productCode, p.productLine;
+
+
+
+SELECT productCode, productLine, n1.Total_Quantity
+FROM new_table n1
+WHERE 3 > (SELECT COUNT(n2.Total_Quantity)
+           FROM new_table n2
+           WHERE n1.Total_Quantity > n2.Total_Quantity 
+           AND n1.productLine = n2.productLine)
+ORDER BY productLine, n1.Total_Quantity DESC;

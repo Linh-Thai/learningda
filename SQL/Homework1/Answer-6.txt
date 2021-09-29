@@ -1,0 +1,4 @@
+SELECT productCode, buyPrice, o.priceEach
+FROM products
+LEFT JOIN orderdetails o USING (productCode)
+WHERE o.priceEach IS NULL;

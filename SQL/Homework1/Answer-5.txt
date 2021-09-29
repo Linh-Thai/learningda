@@ -1,0 +1,9 @@
+SELECT o1.orderNumber, o2.productCode
+FROM orders o1
+	JOIN customers c 
+    	ON o1.customerNumber = c.customerNumber 
+	JOIN orderdetails o2 
+    	ON o1.orderNumber = o2.orderNumber 
+WHERE o1.shippedDate > '2003-01-01' 
+	AND o1.shippedDate < '2003-12-31'
+	AND o1.customerNumber = 131;

@@ -1,0 +1,3 @@
+SELECT orderNumber, shippedDate
+FROM orders
+WHERE shippedDate  '2003-05-01';
